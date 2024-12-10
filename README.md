@@ -1,93 +1,199 @@
-# d2gnn
+# Crystal Graph Convolutional Neural Networks
 
+This software package implements the Crystal Graph Convolutional Neural Networks (CGCNN) that takes an arbitary crystal structure to predict material properties. 
 
+The package provides two major functions:
 
-## Getting started
+- Train a CGCNN model with a customized dataset.
+- Predict material properties of new crystals with a pre-trained CGCNN model.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+The following paper describes the details of the CGCNN framework:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+[Crystal Graph Convolutional Neural Networks for an Accurate and Interpretable Prediction of Material Properties](https://link.aps.org/doi/10.1103/PhysRevLett.120.145301)
 
-## Add your files
+## Table of Contents
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- [How to cite](#how-to-cite)
+- [Prerequisites](#prerequisites)
+- [Usage](#usage)
+  - [Define a customized dataset](#define-a-customized-dataset)
+  - [Train a CGCNN model](#train-a-cgcnn-model)
+  - [Predict material properties with a pre-trained CGCNN model](#predict-material-properties-with-a-pre-trained-cgcnn-model)
+- [Data](#data)
+- [Authors](#authors)
+- [License](#license)
+
+## How to cite
+
+Please cite the following work if you want to use CGCNN.
 
 ```
-cd existing_repo
-git remote add origin https://gitlab-ex.sandia.gov/defectldrd/d2gnn.git
-git branch -M main
-git push -uf origin main
+@article{PhysRevLett.120.145301,
+  title = {Crystal Graph Convolutional Neural Networks for an Accurate and Interpretable Prediction of Material Properties},
+  author = {Xie, Tian and Grossman, Jeffrey C.},
+  journal = {Phys. Rev. Lett.},
+  volume = {120},
+  issue = {14},
+  pages = {145301},
+  numpages = {6},
+  year = {2018},
+  month = {Apr},
+  publisher = {American Physical Society},
+  doi = {10.1103/PhysRevLett.120.145301},
+  url = {https://link.aps.org/doi/10.1103/PhysRevLett.120.145301}
+}
 ```
 
-## Integrate with your tools
+##  Prerequisites
 
-- [ ] [Set up project integrations](https://gitlab-ex.sandia.gov/defectldrd/d2gnn/-/settings/integrations)
+This package requires:
 
-## Collaborate with your team
+- [PyTorch](http://pytorch.org)
+- [scikit-learn](http://scikit-learn.org/stable/)
+- [pymatgen](http://pymatgen.org)
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+If you are new to Python, the easiest way of installing the prerequisites is via [conda](https://conda.io/docs/index.html). After installing [conda](http://conda.pydata.org/), run the following command to create a new [environment](https://conda.io/docs/user-guide/tasks/manage-environments.html) named `cgcnn` and install all prerequisites:
 
-## Test and Deploy
+```bash
+conda upgrade conda
+conda create -n cgcnn python=3 scikit-learn pytorch torchvision pymatgen -c pytorch -c conda-forge
+```
 
-Use the built-in continuous integration in GitLab.
+*Note: this code is tested for PyTorch v1.0.0+ and is not compatible with versions below v0.4.0 due to some breaking changes.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+This creates a conda environment for running CGCNN. Before using CGCNN, activate the environment by:
 
-***
+```bash
+source activate cgcnn
+```
 
-# Editing this README
+Then, in directory `cgcnn`, you can test if all the prerequisites are installed properly by running:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+```bash
+python main.py -h
+python predict.py -h
+```
 
-## Suggestions for a good README
+This should display the help messages for `main.py` and `predict.py`. If you find no error messages, it means that the prerequisites are installed properly.
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+After you finished using CGCNN, exit the environment by:
 
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+```bash
+source deactivate
+```
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Define a customized dataset 
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+To input crystal structures to CGCNN, you will need to define a customized dataset. Note that this is required for both training and predicting. 
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Before defining a customized dataset, you will need:
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+- [CIF](https://en.wikipedia.org/wiki/Crystallographic_Information_File) files recording the structure of the crystals that you are interested in
+- The target properties for each crystal (not needed for predicting, but you need to put some random numbers in `id_prop.csv`)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+You can create a customized dataset by creating a directory `root_dir` with the following files: 
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+1. `id_prop.csv`: a [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) file with two columns. The first column recodes a unique `ID` for each crystal, and the second column recodes the value of target property. If you want to predict material properties with `predict.py`, you can put any number in the second column. (The second column is still needed.)
+
+2. `atom_init.json`: a [JSON](https://en.wikipedia.org/wiki/JSON) file that stores the initialization vector for each element. An example of `atom_init.json` is `data/sample-regression/atom_init.json`, which should be good for most applications.
+
+3. `ID.cif`: a [CIF](https://en.wikipedia.org/wiki/Crystallographic_Information_File) file that recodes the crystal structure, where `ID` is the unique `ID` for the crystal.
+
+The structure of the `root_dir` should be:
+
+```
+root_dir
+├── id_prop.csv
+├── atom_init.json
+├── id0.cif
+├── id1.cif
+├── ...
+```
+
+There are two examples of customized datasets in the repository: `data/sample-regression` for regression and `data/sample-classification` for classification. 
+
+**For advanced PyTorch users**
+
+The above method of creating a customized dataset uses the `CIFData` class in `cgcnn.data`. If you want a more flexible way to input crystal structures, PyTorch has a great [Tutorial](http://pytorch.org/tutorials/beginner/data_loading_tutorial.html#sphx-glr-beginner-data-loading-tutorial-py) for writing your own dataset class.
+
+### Train a CGCNN model
+
+Before training a new CGCNN model, you will need to:
+
+- [Define a customized dataset](#define-a-customized-dataset) at `root_dir` to store the structure-property relations of interest.
+
+Then, in directory `cgcnn`, you can train a CGCNN model for your customized dataset by:
+
+```bash
+python main.py root_dir
+```
+
+You can set the number of training, validation, and test data with labels `--train-size`, `--val-size`, and `--test-size`. Alternatively, you may use the flags `--train-ratio`, `--val-ratio`, `--test-ratio` instead. Note that the ratio flags cannot be used with the size flags simultaneously. For instance, `data/sample-regression` has 10 data points in total. You can train a model by:
+
+```bash
+python main.py --train-size 6 --val-size 2 --test-size 2 data/sample-regression
+```
+or alternatively
+```bash
+python main.py --train-ratio 0.6 --val-ratio 0.2 --test-ratio 0.2 data/sample-regression
+```
+
+You can also train a classification model with label `--task classification`. For instance, you can use `data/sample-classification` by:
+
+```bash
+python main.py --task classification --train-size 5 --val-size 2 --test-size 3 data/sample-classification
+```
+
+After training, you will get three files in `cgcnn` directory.
+
+- `model_best.pth.tar`: stores the CGCNN model with the best validation accuracy.
+- `checkpoint.pth.tar`: stores the CGCNN model at the last epoch.
+- `test_results.csv`: stores the `ID`, target value, and predicted value for each crystal in test set.
+
+### Predict material properties with a pre-trained CGCNN model
+
+Before predicting the material properties, you will need to:
+
+- [Define a customized dataset](#define-a-customized-dataset) at `root_dir` for all the crystal structures that you want to predict.
+- Obtain a [pre-trained CGCNN model](pre-trained) named `pre-trained.pth.tar`.
+
+Then, in directory `cgcnn`, you can predict the properties of the crystals in `root_dir`:
+
+```bash
+python predict.py pre-trained.pth.tar root_dir
+```
+
+For instace, you can predict the formation energies of the crystals in `data/sample-regression`:
+
+```bash
+python predict.py pre-trained/formation-energy-per-atom.pth.tar data/sample-regression
+```
+
+And you can also predict if the crystals in `data/sample-classification` are metal (1) or semiconductors (0):
+
+```bash
+python predict.py pre-trained/semi-metal-classification.pth.tar data/sample-classification
+```
+
+Note that for classification, the predicted values in `test_results.csv` is a probability between 0 and 1 that the crystal can be classified as 1 (metal in the above example).
+
+After predicting, you will get one file in `cgcnn` directory:
+
+- `test_results.csv`: stores the `ID`, target value, and predicted value for each crystal in test set. Here the target value is just any number that you set while defining the dataset in `id_prop.csv`, which is not important.
+
+## Data
+
+To reproduce our paper, you can download the corresponding datasets following the [instruction](data/material-data).
+
+## Authors
+
+This software was primarily written by [Tian Xie](http://txie.me) who was advised by [Prof. Jeffrey Grossman](https://dmse.mit.edu/faculty/profile/grossman). 
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+CGCNN is released under the MIT License.
+
+
+

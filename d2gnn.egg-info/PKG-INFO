@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: d2gnn
+Version: 0.1
+Summary: GNN for defect formation and migration energies (based originally on CGCNN architecture with various updates)
+Author: Matthew Witman
+Author-email: mwitman1@sandia.gov
+License: MIT
+Requires-Python: >3.6
+License-File: LICENSE
+Requires-Dist: pymatgen
+Requires-Dist: ase
+Requires-Dist: torch
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
