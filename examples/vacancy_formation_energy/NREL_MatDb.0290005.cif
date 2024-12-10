@@ -1,0 +1,35 @@
+data_image0
+_chemical_formula_structural       Mg2O6Ti2
+_chemical_formula_sum              "Mg2 O6 Ti2"
+_cell_length_a       5.117921901002344
+_cell_length_b       5.117921104471514
+_cell_length_c       5.536992541651878
+_cell_angle_alpha    62.473591722984196
+_cell_angle_beta     62.47355282674282
+_cell_angle_gamma    59.99987911426831
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Mg  Mg1       1.0  0.6447368099999999  0.64473752  0.0657879  1.0000
+  Mg  Mg2       1.0  0.35526319999999983  0.35526249  0.9342120700000001  1.0000
+  O   O1        1.0  0.04807813999999996  0.43860516999999993  0.7399862500000001  1.0000
+  O   O2        1.0  0.7733295899999998  0.04807893000000004  0.7399860399999999  1.0000
+  O   O3        1.0  0.4386052200000002  0.7733302999999999  0.7399860899999999  1.0000
+  O   O4        1.0  0.9519218599999997  0.5613948600000003  0.26001376  1.0000
+  O   O5        1.0  0.22667036999999987  0.95192107  0.26001397  1.0000
+  O   O6        1.0  0.56139481  0.22666966000000008  0.26001392  1.0000
+  Ti  Ti1       1.0  0.8546223199999997  0.8546221300000002  0.43613381  1.0000
+  Ti  Ti2       1.0  0.14537768000000004  0.14537787999999996  0.56386618  1.0000

@@ -1,0 +1,36 @@
+data_image0
+_chemical_formula_structural       Ba3In2O6
+_chemical_formula_sum              "Ba3 In2 O6"
+_cell_length_a       4.257422050585365
+_cell_length_b       4.257421387589675
+_cell_length_c       11.38673649434869
+_cell_angle_alpha    100.77310135455181
+_cell_angle_beta     100.77310275680443
+_cell_angle_gamma    89.99927455407226
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Ba  Ba1       1.0  0.5  0.5000000000000001  0.0  1.0000
+  Ba  Ba2       1.0  0.31696377  0.31696374  0.63397796  1.0000
+  Ba  Ba3       1.0  0.6830362299999999  0.68303625  0.36602204  1.0000
+  In  In1       1.0  0.8971711200000001  0.89717112  0.79454412  1.0000
+  In  In2       1.0  0.10282887999999998  0.10282887999999998  0.20545587999999998  1.0000
+  O   O1        1.0  0.9160892499999997  0.4160454699999998  0.8322693299999998  1.0000
+  O   O2        1.0  0.41604544000000004  0.9160891699999999  0.83226922  1.0000
+  O   O3        1.0  0.08391075  0.5839545299999999  0.16773068  1.0000
+  O   O4        1.0  0.58395455  0.08391083  0.16773078  1.0000
+  O   O5        1.0  0.8012797699999998  0.8012797599999999  0.6027831499999999  1.0000
+  O   O6        1.0  0.19872023999999996  0.19872024999999996  0.39721684999999995  1.0000

@@ -1,0 +1,35 @@
+data_image0
+_chemical_formula_structural       Sr3Fe2O5
+_chemical_formula_sum              "Sr3 Fe2 O5"
+_cell_length_a       3.5461529744872777
+_cell_length_b       3.9962306271035954
+_cell_length_c       10.893311917286988
+_cell_angle_alpha    100.56896686142974
+_cell_angle_beta     99.3694015954761
+_cell_angle_gamma    89.99938149983616
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Sr  Sr1       1.0  0.5000005800000001  0.5000018299999999  1.39e-06  1.0000
+  Sr  Sr2       1.0  0.6877606300000001  0.6877548599999999  0.3755543399999999  1.0000
+  Sr  Sr3       1.0  0.31224031  0.31224874  0.6244482999999998  1.0000
+  Fe  Fe1       1.0  0.90357593  0.9035929699999999  0.8070556799999999  1.0000
+  Fe  Fe2       1.0  0.09642505999999999  0.09641053  0.19294693999999998  1.0000
+  O   O1        1.0  1.22e-06  1.8200000000000002e-06  1.37e-06  1.0000
+  O   O2        1.0  0.9044131400000001  0.40442047999999997  0.8087363399999999  1.0000
+  O   O3        1.0  0.09558676  0.59558313  0.19126641  1.0000
+  O   O4        1.0  0.8071754800000001  0.8071969499999997  0.6142983399999999  1.0000
+  O   O5        1.0  0.19282615  0.19280676999999993  0.3857042999999999  1.0000

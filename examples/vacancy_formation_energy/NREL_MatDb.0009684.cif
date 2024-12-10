@@ -1,0 +1,29 @@
+data_image0
+_chemical_formula_structural       Fe2O2
+_chemical_formula_sum              "Fe2 O2"
+_cell_length_a       5.287761505124912
+_cell_length_b       5.396079939339979
+_cell_length_c       5.286019462747853
+_cell_angle_alpha    33.971842985766095
+_cell_angle_beta     33.86701405529809
+_cell_angle_gamma    34.01349178071259
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Fe  Fe1       1.0  0.0  0.0  0.9999999900000001  1.0000
+  Fe  Fe2       1.0  0.49999999000000034  0.5000000100000002  0.4999999999999997  1.0000
+  O   O1        1.0  0.7991436900000001  0.7514317300000001  0.6996146099999999  1.0000
+  O   O2        1.0  0.20085631999999995  0.24856826000000024  0.30038539999999997  1.0000

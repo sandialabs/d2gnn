@@ -1,0 +1,35 @@
+data_image0
+_chemical_formula_structural       Ni2O6Ti2
+_chemical_formula_sum              "Ni2 O6 Ti2"
+_cell_length_a       5.088175921144713
+_cell_length_b       5.088210751003421
+_cell_length_c       5.484612779836365
+_cell_angle_alpha    62.36359448833182
+_cell_angle_beta     62.362689881883284
+_cell_angle_gamma    59.99943436574786
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Ni  Ni1       1.0  0.6500213500000002  0.65002012  0.04993594  1.0000
+  Ni  Ni2       1.0  0.34997967  0.34997956  0.95006233  1.0000
+  O   O1        1.0  0.05247659999999998  0.43937649  0.74138422  1.0000
+  O   O2        1.0  0.7667548399999997  0.052497770000000006  0.74136561  1.0000
+  O   O3        1.0  0.43936749  0.7667739799999996  0.7413710200000001  1.0000
+  O   O4        1.0  0.94752448  0.5606231899999999  0.25861397  1.0000
+  O   O5        1.0  0.23324620999999987  0.9475019200000002  0.25863259  1.0000
+  O   O6        1.0  0.5606335799999997  0.23322568  0.2586271600000001  1.0000
+  Ti  Ti1       1.0  0.8553235499999998  0.8553117300000003  0.43403986000000006  1.0000
+  Ti  Ti2       1.0  0.1446775  0.14468793999999996  0.56595838  1.0000

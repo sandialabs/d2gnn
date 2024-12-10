@@ -1,0 +1,31 @@
+data_image0
+_chemical_formula_structural       Mn2BaO3
+_chemical_formula_sum              "Mn2 Ba1 O3"
+_cell_length_a       3.6401528199979567
+_cell_length_b       4.39832967706962
+_cell_length_c       6.224863436798271
+_cell_angle_alpha    110.68914872081238
+_cell_angle_beta     107.00358138220794
+_cell_angle_gamma    89.99972158906138
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Mn  Mn1       1.0  0.8111900499999999  0.31119294999999997  0.6223852399999998  1.0000
+  Mn  Mn2       1.0  0.18880994999999998  0.6888070499999999  0.37761477  1.0000
+  Ba  Ba1       1.0  0.4999999999999999  0.0  0.0  1.0000
+  O   O1        1.0  0.7954610699999999  0.7954498199999999  0.59087701  1.0000
+  O   O2        1.0  0.20453893  0.20455019  0.40912299  1.0000
+  O   O3        1.0  0.99999999  0.49999999000000006  0.99999999  1.0000

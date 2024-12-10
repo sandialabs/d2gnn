@@ -1,0 +1,12 @@
+--disable-cuda 
+--vac_diff_path_len 5 
+--max_num_nbr 16 
+--pooltype vac_diff_constrain_2 
+--atom-fea-len 8 
+--n-conv 2 
+--h-fea-len 8 
+--n-h 1 
+--epochs 10 
+--init-embed-file atom_init.json.vep 
+--test-ratio 0.01 
+--lr 0.025

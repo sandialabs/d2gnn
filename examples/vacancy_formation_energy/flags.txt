@@ -1,0 +1,11 @@
+--disable-cuda 
+--max_num_nbr 16 
+--pooltype node 
+--atom-fea-len 8 
+--n-conv 2 
+--h-fea-len 8 
+--n-h 1 
+--epochs 10 
+--init-embed-file atom_init.json.vep 
+--test-ratio 0.005 
+--lr 0.025

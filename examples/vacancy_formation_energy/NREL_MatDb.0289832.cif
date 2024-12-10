@@ -1,0 +1,35 @@
+data_image0
+_chemical_formula_structural       Al2Ce2O6
+_chemical_formula_sum              "Al2 Ce2 O6"
+_cell_length_a       5.387437641026864
+_cell_length_b       5.351812735686474
+_cell_length_c       5.394458533229033
+_cell_angle_alpha    60.265238080211454
+_cell_angle_beta     60.04318856395246
+_cell_angle_gamma    89.99980536123032
+
+_space_group_name_H-M_alt    "P 1"
+_space_group_IT_number       1
+
+loop_
+  _space_group_symop_operation_xyz
+  'x, y, z'
+
+loop_
+  _atom_site_type_symbol
+  _atom_site_label
+  _atom_site_symmetry_multiplicity
+  _atom_site_fract_x
+  _atom_site_fract_y
+  _atom_site_fract_z
+  _atom_site_occupancy
+  Al  Al1       1.0  0.9999920399999999  0.9999893199999998  1.47e-06  1.0000
+  Al  Al2       1.0  0.49999317000000004  0.50000883  0.9999994000000001  1.0000
+  Ce  Ce1       1.0  0.7499148900000001  0.2500016  0.5000004100000001  1.0000
+  Ce  Ce2       1.0  0.24993379  0.75000043  0.5000004400000001  1.0000
+  O   O1        1.0  0.7187253500000002  0.7821407500000002  4.595e-05  1.0000
+  O   O2        1.0  0.7813256500000001  0.28220992999999994  4.771e-05  1.0000
+  O   O3        1.0  0.21877085000000007  0.7178596300000001  0.9999538800000001  1.0000
+  O   O4        1.0  0.2813749500000001  0.21779061000000002  0.9999511700000002  1.0000
+  O   O5        1.0  0.24994453999999997  0.24999945999999992  0.4999995800000001  1.0000
+  O   O6        1.0  0.75002477  0.7499994299999998  0.4999999800000002  1.0000
