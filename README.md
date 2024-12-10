@@ -1,20 +1,20 @@
-# Personal and defect modifications to CGCNN
+# Defect diffusion graph neural networks (d2gnn)
 
-Modifications for predicting defects and other various personal modifications have been made to make some tasks easier: cross-validation, running on cluster, etc.
+This project represents modifications and extensions of the original CGCNN code (see below for its README and LICENSE) to predict vacancy defect formation energies and migration energies. Other small modifications have been made to various parts of the code to make some tasks easier: more control over edge features, nested k-fold cross-validation, running on cluster etc.
 
-### Installable package
-To install as a package use
+### Basic usage
+Install package using:
 ```bash
 pip install -e .
 ```
-which allows you to then execute training or prediction tasks from anywhere using the command line:
+Execute training or prediction tasks using the command line:
 ```bash
-cgcnn-defect-train $flags
-cgcnn-defect-predict $flags
+d2gnn-train $flags
+d2gnn-predict $flags
 ```
 
-### Various CL args
-Can control target files via CL args to facilitate high-throughput execution across different encoding strategies, cross-validation, etc.
+### Some important CL args
+Control target files via CL args to facilitate high-throughput execution across different encoding strategies, cross-validation, etc.
 - To change elemenent encoding file
 ```bash
 --init-embed-file $your_atom_init.json
@@ -24,8 +24,79 @@ Can control target files via CL args to facilitate high-throughput execution acr
 --csv-ext .your_csv_ext
 ```
 
-### Defect modifications
-- Pooling function has been hard coded to only extract the feature vector of the node at index i=0 (the atom to be defected). In progress: this will be made a lot more efficient in the future by specifying the index from the CL and not needing multiple CIF files for all unique defects within a given host structure
+### Model prediction types (modifications enabling defect-related predictions)
+
+#### Vacancy formation energies
+
+- Concept: each *symmetrically distinct site* in a crystal structure can have a distinct vacancy formation energy, so a GNN surrogate model must provide a one-to-many prediction, i.e., one structure to multiple vacancy energies. This is accomplished by post-convolution node feature selection corresponding to the vacancy site in question, followed by downstream learning (see https://doi.org/10.1038/s43588-023-00495-2)
+
+- For this application, a complete working example is provided in:
+```bash
+cd d2gnn/examples/vacancy_formation_energy
+./command.sh
+```
+- The CL argument enabiling the critical functionality is: 
+```bash
+--pooltype node
+```
+- The id_prop.csv* file therefore must have the following format:
+```bash
+<stucture_id_1:tag0>, <index>, <DFT_value>
+<stucture_id_1:tag1>, <index>, <DFT_value>
+<stucture_id_2:tag0>, <index>, <DFT_value>
+<stucture_id_2:tag1>, <index>, <DFT_value>
+<stucture_id_2:tag2>, <index>, <DFT_value>
+...
+```
+- The results will be output to test_results.csv (running d2gnn-train) or all_results.csv (running d2gnn-predict):
+```bash
+<stucture_id_1:tag0>, <index>, <DFT_value>, <model_value>
+<stucture_id_1:tag1>, <index>, <DFT_value>, <model_value>
+<stucture_id_2:tag0>, <index>, <DFT_value>, <model_value>
+<stucture_id_2:tag1>, <index>, <DFT_value>, <model_value>
+<stucture_id_2:tag2>, <index>, <DFT_value>, <model_value>
+...
+```
+
+#### Vacancy migration energies
+
+- Concept: each symmetrically distinct *path* in a crystal structure can have a distinct migration energy, as derived from an NEB calculation. Requirements of a GNN surrogate model become much more complex (see doi: https://doi.org/10.26434/chemrxiv-2024-wrp5z), but it remains a one-to-many prediction, i.e., one structure to multiple migration energies (preferably for all possible migration paths for a given element type within the crystal structure). This is accomplished by introducing virtual nodes along the migration path interpolated along the vector between the start and end sites for the vacancy (i.e., NEB images), assembling the NEB sequence of energies from site and virtual nodes post-convolution, utilizing seq2seq update (e.g., Transformer encoder), and decodeing virtual and site noedes through different output layers to re-assemble the NEB energy sequence.
+
+- For this application, a complete working example is provided in:
+```bash
+cd d2gnn/examples/vacancy_migration_energy
+./command.sh
+```
+- The CL argument enabiling the critical functionality is: 
+```bash
+--pooltype vac_diff_constrain_2
+```
+- The  id_prop.csv* file therefore must have the following format:
+```bash
+<stucture_id_1:tag0>, <index1>, <index2>, <DFT_value_0>, ... , <DFT_value_n>
+<stucture_id_1:tag1>, <index1>, <index2>, <DFT_value_0>, ... , <DFT_value_n>
+<stucture_id_2:tag0>, <index1>, <index2>, <DFT_value_0>, ... , <DFT_value_n> 
+...
+```
+
+#### Global property predictions
+
+- This application recovers the intent of from the original CGCNN code to predict global properties of crystal structures (e.g. formation energy, band gap, etc.)
+
+- The CL argument for this functionality 
+```bash
+--pooltype all
+```
+- The  id_prop.csv* file therefore must have the following format:
+```bash
+<stucture_id_1>, <value>
+<stucture_id_2>, <value>
+...
+```
+
+
+### Introduction of additional, application-specific local and global featuers
+
 - For a given structure1.cif, can introduce local node attributes (e.g. oxidation state) contained in structure1.cif.locals at the graph encoding stage via:
 ```bash
 --atom-spec locals
@@ -34,7 +105,7 @@ Can control target files via CL args to facilitate high-throughput execution acr
 ```bash
 --crys-spec globals
 ``` 
-- EXPERIMENTAL: can use a local convolution block based on spherical harmonics (at the cost of higher model complexity)
+
 
 ### How to cite
 
@@ -55,15 +126,31 @@ Please cite the following work if you want to use CGCNN and defect modifications
   doi = {10.1103/PhysRevLett.120.145301},
   url = {https://link.aps.org/doi/10.1103/PhysRevLett.120.145301}
 }
-@article{Witman2022,
-  author = {Witman, Matthew D. and Goyal, Anuj and Ogitsu, Tadashi and McDaniel, Anthony H. and Lany, Stephan},
-  doi = {10.26434/chemrxiv-2022-frcns},
-  journal = {ChemRxiv},
-  pages = {10.26434/chemrxiv-2022-frcns},
-  title = {{Graph neural network modeling of vacancy formation enthalpy for materials discovery and its application in solar thermochemical water splitting}},
-  year = {2022},
-  url = {https://chemrxiv.org/engage/chemrxiv/article-details/628bdf9f87d01f60fcefa355}
+@article{Witman2023,
+  author = {Witman, Matthew D and Goyal, Anuj and Ogitsu, Tadashi and McDaniel, Anthony H. and Lany, Stephan},
+  doi = {10.1038/s43588-023-00495-2},
+  file = {:Users/mwitman/Research/Papers/WitmanLany{\_}STCH-ML{\_}2023.pdf:pdf},
+  issn = {2662-8457},
+  journal = {Nat. Comput. Sci.},
+  month = {aug},
+  number = {8},
+  pages = {675--686},
+  publisher = {Springer US},
+  title = {{Defect graph neural networks for materials discovery in high-temperature clean-energy applications}},
+  url = {https://www.nature.com/articles/s43588-023-00495-2},
+  volume = {3},
+  year = {2023}
 }
+@misc{Way2024,
+  author = {Way, Lauren and Spataru, Catalin and Jones, Reese and Trinkle, Dallas and Rowberg, Andrew and Varley, Joel and Wexler, Robert and Smyth, Christopher and Douglas, Tyra and Bishop, Sean and Fuller, Elliot and McDaniel, Anthony and Lany, Stephan and Witman, Matthew},
+  booktitle = {ChemRxiv},
+  doi = {10.26434/chemrxiv-2024-wrp5z},
+  month = {aug},
+  title = {{Defect diffusion graph neural networks for materials discovery in high-temperature, clean energy applications}},
+  url = {https://doi.org/10.26434/chemrxiv-2024-wrp5z https://chemrxiv.org/engage/chemrxiv/article-details/66c79806a4e53c487644c72b},
+  year = {2024}
+}
+
 ```
 
 # Crystal Graph Convolutional Neural Networks
